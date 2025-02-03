@@ -33,6 +33,13 @@ function setupEventListeners() {
     document.getElementById('scaleSlider').addEventListener('input', handleScale)
     document.getElementById('resolutionSelect').addEventListener('change', handleResolutionChange)
     document.getElementById('generateBtn').addEventListener('click', generateBootAnimation)
+    document.getElementById('playBtn').addEventListener('click', playVideo)
+}
+
+function playVideo() {
+    if (!video.src) return
+    video.play()
+    video.requestVideoFrameCallback(drawVideoFrame)
 }
 
 function startDragging(e) {
