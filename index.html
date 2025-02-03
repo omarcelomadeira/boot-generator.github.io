@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boot Image Generator</title>
+  <style>
+    :root {
+      --primary: #2ecc71;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    .header {
+      margin-bottom: 3rem;
+    }
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(to right, var(--primary), #3498db);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      color: #94a3b8;
+    }
+
+    .content {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .controls {
+      background: var(--surface);
+      padding: 2rem;
+      border-radius: 1rem;
+      height: fit-content;
+    }
+
+    .control-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .control-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    select,
+    input[type="file"],
+    input[type="range"] {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg);
+      border: 1px solid #475569;
+      border-radius: 0.5rem;
+      color: var(--text);
+    }
+
+    input[type="color"] {
+      width: 100%;
+      height: 40px;
+      border: none;
+      border-radius: 0.5rem;
+      background: var(--bg);
+    }
+
+    #canvas-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: var(--surface);
+      border-radius: 1rem;
+      padding: 1rem;
+    }
+
+    #canvas-container canvas {
+      max-width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    button {
+      width: 100%;
+      background: var(--primary);
+      color: #000;
+      border: none;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        padding: 3rem 2rem;
+      }
+
+      .content {
+        grid-template-columns: 350px 1fr;
+      }
+
+      .controls {
+        position: sticky;
+        top: 2rem;
+      }
+
+      #canvas-container {
+        min-height: 600px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="content">
+      <div class="left-column">
+        <header class="header">
+          <h1 class="title">Boot Image Generator</h1>
+          <p class="description">Create custom boot images by uploading, positioning, and scaling your image. Choose
+            your preferred resolution and background color for the perfect result.</p>
+        </header>
+
+        <div class="controls">
+          <div class="control-group">
+            <label>Upload Image</label>
+            <input type="file" id="imageInput" accept="image/*">
+          </div>
+
+          <div class="control-group">
+            <label>Scale Image</label>
+            <input type="range" id="scaleSlider" min="0.1" max="2" step="0.1" value="1">
+          </div>
+
+          <div class="control-group">
+            <label>Select Resolution</label>
+            <select id="resolutionSelect">
+              <option value="0">1280x720 (Landscape)</option>
+              <option value="1">720x1280 (Portrait)</option>
+              <option value="2">1920x1080 (Full HD)</option>
+              <option value="3">1080x1920 (Full HD Portrait)</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label>Background Color</label>
+            <input type="color" id="bgColorInput" value="#000000">
+          </div>
+
+          <div class="control-group">
+            <button id="generateBtn">Generate BMP</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="canvas-container"></div>
+    </div>
+    <div class="footer">
+      <p>Made with ❤️ by <a href="https://github.com/marcelomatos" target="_blank">Marcelo Matos</a></p>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
