@@ -99,14 +99,14 @@
       width: 100%;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
       background: var(--surface);
       border-radius: 1rem;
       padding: 1rem;
     }
 
     #canvas-container canvas {
-      max-width: 100%;
+      width: 100%;
       height: auto;
       border-radius: 0.5rem;
     }
@@ -128,6 +128,15 @@
       opacity: 0.9;
     }
 
+    .footer {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .footer a {
+      color: var(--primary);
+    }
+
     @media (min-width: 1024px) {
       .container {
         padding: 3rem 2rem;
@@ -144,6 +153,14 @@
 
       #canvas-container {
         min-height: 600px;
+      }
+
+      #canvas-container canvas#canvas-9-inches {
+        width: 80%;
+      }
+
+      #canvas-container canvas#canvas-9-7-inches {
+        width: 50%;
       }
     }
   </style>
@@ -173,10 +190,6 @@
           <div class="control-group">
             <label>Select Resolution</label>
             <select id="resolutionSelect">
-              <option value="0">1280x720 (Landscape)</option>
-              <option value="1">720x1280 (Portrait)</option>
-              <option value="2">1920x1080 (Full HD)</option>
-              <option value="3">1080x1920 (Full HD Portrait)</option>
             </select>
           </div>
 

@@ -9,18 +9,28 @@ let imageY = 0
 let scale = 1
 
 const resolutions = [
-  { width: 1280, height: 720, label: "1280x720 (Landscape)" },
-  { width: 720, height: 1280, label: "720x1280 (Portrait)" },
-  { width: 1920, height: 1080, label: "1920x1080 (Full HD)" },
-  { width: 1080, height: 1920, label: "1080x1920 (Full HD Portrait)" }
+  { width: 1280, height: 720, label: "9 inches Horizontal", id: "canvas-9-inches" },
+  { width: 762, height: 1024, label: "9,7 inches Vertical", id: "canvas-9-7-inches" },
 ]
+
+function setupResolutionSelect() {
+  const select = document.getElementById('resolutionSelect')
+  resolutions.forEach((resolution, index) => {
+    const option = document.createElement('option')
+    option.value = index
+    option.text = resolution.label
+    select.appendChild(option)
+  })
+}
 
 function initializeCanvas() {
   const defaultResolution = resolutions[0]
   canvas.width = defaultResolution.width
   canvas.height = defaultResolution.height
+  canvas.id = defaultResolution.id
   document.getElementById('canvas-container').appendChild(canvas)
   setupEventListeners()
+  setupResolutionSelect()
 }
 
 function setupEventListeners() {
@@ -81,6 +91,7 @@ function handleResolutionChange(e) {
   const resolution = resolutions[e.target.value]
   canvas.width = resolution.width
   canvas.height = resolution.height
+  canvas.id = resolution.id
   redraw()
 }
 
